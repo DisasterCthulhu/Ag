@@ -25,7 +25,8 @@
 #define Ag_Lib                             (Ag_Module("Lib"))
 #define Ag_Lib_Interface                   (Ag_Module("Lib_interface"))
 #define Ag_Object_Base                     (Ag_Misc("Object"))
-#define Ag_Object(x)                       (Ag_Misc("object_" + (x)))    // object_blob, commit, tree, tag.
+#define Ag_Object_Valid_Type(x)            (member(({"blob", "commit", "tree", "tag"}), (x)) > Null)
+#define Ag_Object(x)                       (Ag_Object_Valid_Type(x) && Ag_Misc("object_" + (x)))
 
 #define Ag_Repo_Find(x, y, z)              (Ag_Daemon("control")->ag_repo_find(x, y, z)) // who, path, required => repo
 #define Ag_Repository                      (Ag_Misc("repository"))
