@@ -70,7 +70,7 @@ mixed ag_object_read(object repo, string hash) {
     return objects[hash] = ag_restore_object(repo, format, data);
 }
 
-string object_write(object obj, status actually_write) {
+string ag_object_write(object obj, status actually_write) {
     string data = obj->serialize(); // Data cannot contain nulls.
     string repr = obj->query_format() +
         " " + // type / length separator

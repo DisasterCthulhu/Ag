@@ -5,8 +5,8 @@
 inherit "/std/item";
 inherit Ag_Module("utils");
 inherit Ag_Module("cmd_init");
-//inherit Ag_Module("cmd_cat_file");
-//inherit Ag_Module("cmd_hash_object");
+inherit Ag_Module("cmd_cat_file");
+inherit Ag_Module("cmd_hash_object");
 
 mixed ag_can_move(mapping args) {
     unless(is_developer(args["to"]))
@@ -20,7 +20,6 @@ void ag_do_move(mapping args) {
 		add_action("ag_cmd", "ag");
 	}
 }
-/*
 status ag_cmd_hash_object(string array args) {
     return ag_mod_cmd_hash_object(args);
 }
@@ -28,7 +27,7 @@ status ag_cmd_hash_object(string array args) {
 status ag_cmd_cat_file(string array args) {
     return ag_mod_cmd_cat_file(args);
 }
-*/
+
 status ag_cmd_init(string array args) {
     return ag_mod_cmd_init(args);
 }
@@ -57,10 +56,10 @@ status ag_cmd(string args) {
             return ag_cmd_init(parts);
             break;
         case "hash-object":
-            //return ag_cmd_hash_object(parts);
+            return ag_cmd_hash_object(parts);
             break;
         case "cat-file":
-            //return ag_cmd_cat_file(parts);
+            return ag_cmd_cat_file(parts);
             break;
         case "--help": // fallthrough to help
         case "-h":
