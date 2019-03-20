@@ -1,0 +1,12 @@
+# see https://docs.gitlab.com/ce/ci/yaml/README.html for all available options
+stages:
+    - deploy
+deploy_master:
+    stage: deploy
+    environment:
+        name: dev
+        url: http://dev.example.com/
+    script:
+        - lftp -e "open --env-password elronuan-dev@lostsouls.org; mkdir $CI_PROJECT_NAME; mirror --exclude .git/ -R . $CI_PROJECT_NAME ; ls -a $CI_PROJECT_NAME ; exit"
+    only:
+        - master
